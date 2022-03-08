@@ -27,7 +27,7 @@ body {
 	left: calc(50vw - calc(var(--sizeX) / 2));
 }
 
-.player, .ball {
+.player, #ball {
 	width: 2%;
 	height: 21%;
 	position: absolute;
@@ -42,10 +42,9 @@ body {
 	right: var(--padding);
 }
 
-.ball {
+#ball {
 	--size: calc(var(--sizeY) / 100 * 5);
 
 	height: var(--size);
 	width: var(--size);
-	transform: translateX(50%);
 }
