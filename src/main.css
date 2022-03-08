@@ -1,0 +1,51 @@
+:root {
+	--bg: #FFFFFF;
+	--radius: 8px;
+	--padding: 15px;
+	--shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+
+	--player: #000000;
+}
+
+body {
+	background: var(--bg);
+}
+
+#main {
+	--sizeY: 30vw;
+	--sizeX: 50vw;
+
+	width: var(--sizeX);
+	height: var(--sizeY);
+
+	background: var(--box);
+	box-shadow: var(--shadow);
+	border-radius: var(--radius);
+
+	position: fixed;
+	top: calc(50vh - calc(var(--sizeY) / 2));
+	left: calc(50vw - calc(var(--sizeX) / 2));
+}
+
+.player, .ball {
+	width: 2%;
+	height: 21%;
+	position: absolute;
+	top: var(--padding);
+	left: var(--padding);
+	background: var(--player);
+	border-radius: calc(var(--radius) / 2);
+}
+
+.player.right {
+	left: unset;
+	right: var(--padding);
+}
+
+.ball {
+	--size: calc(var(--sizeY) / 100 * 5);
+
+	height: var(--size);
+	width: var(--size);
+	transform: translateX(50%);
+}
