@@ -9,6 +9,7 @@
 
 body {
 	background: var(--bg);
+	font-family: "Roboto Mono", monospace;
 }
 
 #main {
@@ -48,3 +49,15 @@ body {
 	height: var(--size);
 	width: var(--size);
 }
+
+#scores {
+	width: 100%;
+	opacity: 0.4;
+	display: flex;
+	font-size: 3em;
+	vertical-align: middle;
+	line-height: var(--sizeY);
+	justify-content: space-around;
+}
+
+#leftscore {text-align: right}

@@ -178,6 +178,8 @@ function reset() {
 	}
 	velocity.y = num();
 	velocity.x = num();
+
+	updateScores();
 }
 
 // 
@@ -190,5 +192,10 @@ let scores = {
 }
 
 function updateScores() {
-
+	leftscore.innerHTML = scores.left;
+	rightscore.innerHTML = scores.right;
 }
+
+
+
+reset()
