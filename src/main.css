@@ -37,7 +37,7 @@ body {
 	border-radius: calc(var(--radius) / 2);
 }
 
-.player.right {
+.player#right {
 	left: unset;
 	right: var(--padding);
 }

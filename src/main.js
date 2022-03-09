@@ -46,13 +46,13 @@ var bounds = {
 		return 0
 	},
 	left: () => {
-		return 0
+		return 0 + left.getBoundingClientRect().width - 6;
 	},
 	right: (div) => {
-		let right = main.getBoundingClientRect().width;
-		right -= div.getBoundingClientRect().width;
-		right -= parseInt(getComputedStyle(main).getPropertyValue("--padding")) * 2;
-		return right
+		let rightcord = main.getBoundingClientRect().width;
+		rightcord -= div.getBoundingClientRect().width;
+		rightcord -= parseInt(getComputedStyle(main).getPropertyValue("--padding")) * 2;
+		return rightcord - 6;
 	},
 	bottom: (div) => {
 		let bottom = main.getBoundingClientRect().height;
@@ -77,10 +77,10 @@ function move(paddle, cord) {
 
 	switch(paddle) {
 		case "left":
-			div = $.querySelector(".player.left");
+			div = left;
 			break;
 		case "right":
-			div = $.querySelector(".player.right");
+			div = right;
 			break;
 		case "ball":
 			div = ball;
@@ -103,8 +103,8 @@ function move(paddle, cord) {
 //
 
 let ballpos = {
-	y: 0,
-	x: 0
+	y: 35,
+	x: 35
 }
 
 let velocity = {
@@ -121,26 +121,40 @@ function moveBall() {
 	if (Math.sign(newy) == -1) {increaseY *= -1}
 	if (Math.sign(newx) == -1) {increaseX *= -1}
 
-	if (velocity.y >= 15 || velocity.y <= -15) {increaseY = 0}
-	if (velocity.x >= 15 || velocity.x <= -15) {increaseX = 0}
+	if (velocity.y >= 5 || velocity.y <= -5) {increaseY = 0}
+	if (velocity.x >= 5 || velocity.x <= -5) {increaseX = 0}
 
 	if (newy < bounds.top()) {
-		velocity.y = (velocity.y * -1) + increaseY;
+		velocity.y = (velocity.y * -0.8) + increaseY;
 		return;
 	}
 
 	if (newy > bounds.bottom(ball)) {
-		velocity.y = (velocity.y * -1) + increaseY;
+		velocity.y = (velocity.y * -0.8) + increaseY;
 		return;
 	}
 
 
 	if (newx < bounds.left()) {
+		let point = ball.getBoundingClientRect();
+		pointY = point.top - (point.height / 2);
+		if (! $.elementFromPoint(point.left, pointY).classList.contains("player")) {
+			scores.right++;
+			reset();
+		}
+
 		velocity.x = (velocity.x * -1) + increaseX;
 		return;
 	}
 
 	if (newx > bounds.right(ball)) {
+		let point = ball.getBoundingClientRect();
+		pointY = point.top - (point.height / 2);
+		if (! $.elementFromPoint(point.right, pointY).classList.contains("player")) {
+			scores.left++;
+			reset();
+		}
+
 		velocity.x = (velocity.x * -1) + increaseX;
 		return;
 	}
@@ -149,4 +163,32 @@ function moveBall() {
 	ballpos.x = newx;
 
 	ball.style.transform = `translateY(${newy}px) translateX(${newx}px)`
+}
+
+function reset() {
+	let rect = main.getBoundingClientRect();
+	ballpos.x = rect.width / 2;
+	ballpos.y = rect.height / 2;
+
+	let num = () => {
+		let res = Math.floor(Math.random() * (1 - -1 + 1) + -1)
+		if (res == 0) {
+			return num();
+		} else {return res}
+	}
+	velocity.y = num();
+	velocity.x = num();
+}
+
+// 
+// Scoring System
+//
+
+let scores = {
+	left: 0,
+	right: 0
+}
+
+function updateScores() {
+
 }
