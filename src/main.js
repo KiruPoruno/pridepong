@@ -193,3 +193,17 @@ function updateScores() {
 
 
 reset()
+
+//
+// Pride Stuff (yay!)
+//
+
+async function setcolors() {
+	let colors = await (await fetch("prides.json")).json();
+	let color = colors[Math.floor(Math.random() * colors.length)]
+	for (let i in color) {
+		$.body.style.setProperty("--" + i, color[i])
+	}
+}; setcolors()
+
+

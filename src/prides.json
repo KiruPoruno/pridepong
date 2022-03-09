@@ -1,0 +1,48 @@
+[
+	{
+		"name": "lesbian",
+
+		"left": "#D62900",
+		"leftnum": "#D462A5",
+		"ball": "#FF9B55",
+		"rightnum": "#D462A5",
+		"right": "#A40062"
+	},
+	{
+		"name": "pansexual",
+
+		"left": "#FF228C",
+		"leftnum": "#FF228C",
+		"ball": "#ffd800",
+		"rightnum": "#22B1FF",
+		"right": "#22B1FF"
+	},
+	{
+		"name": "pride",
+
+		"left": "#E82828",
+		"leftnum": "#fe9c25",
+		"ball": "#269346",
+		"rightnum": "#2667ff",
+		"right": "#862995"
+	},
+	{
+		"name": "trans",
+
+		"left": "#5BCFFA",
+		"leftnum": "#F5ABB9",
+		"ball": "#F5ABB9",
+		"rightnum": "#F5ABB9",
+		"right": "#5BCFFA"
+	},
+	{
+		"name": "wlw",
+
+		"left": "#D9406E",
+		"leftnum": "#D9406E",
+		"ball": "#B663CF",
+		"rightnum": "#5437DD",
+		"right": "#5437DD"
+
+	}
+]

@@ -4,7 +4,17 @@
 	--padding: 15px;
 	--shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
 
+	--box: var(--bg);
+	--nums: #000000;
 	--player: #000000;
+
+	--ball: var(--player);
+
+	--left: var(--player);
+	--leftnum: var(--nums);
+
+	--right: var(--player);
+	--rightnum: var(--nums);
 }
 
 body {
@@ -34,20 +44,23 @@ body {
 	position: absolute;
 	top: var(--padding);
 	left: var(--padding);
-	background: var(--player);
 	border-radius: calc(var(--radius) / 2);
 }
 
+.player#left {background: var(--left)}
 .player#right {
 	left: unset;
 	right: var(--padding);
+	background: var(--right);
 }
 
 #ball {
 	--size: calc(var(--sizeY) / 100 * 5);
 
-	height: var(--size);
 	width: var(--size);
+	height: var(--size);
+	background: var(--ball);
+	border-radius: var(--size);
 }
 
 #scores {
@@ -60,4 +73,9 @@ body {
 	justify-content: space-around;
 }
 
-#leftscore {text-align: right}
+#rightscore {color: var(--rightnum)}
+#leftscore {
+	text-align: right;
+	color: var(--leftnum);
+}
+
