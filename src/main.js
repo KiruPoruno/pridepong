@@ -10,7 +10,7 @@ setInterval(() => {
 }, 1)
 
 
-// 
+//
 // Keyboard Input
 //
 
@@ -37,7 +37,7 @@ $.addEventListener("keyup", (e) => {
 	}
 })
 
-// 
+//
 // Bounds
 //
 
@@ -98,7 +98,7 @@ function move(paddle, cord) {
 	div.style.transform = `translateY(${paddles[paddle]}px)`
 }
 
-// 
+//
 // Ball
 //
 
@@ -142,7 +142,10 @@ function moveBall() {
 			! $.elementFromPoint(side, pointY).classList.contains("player") ||
 			! $.elementFromPoint(side, point.top).classList.contains("player") ||
 			! $.elementFromPoint(side, point.bottom).classList.contains("player")) {
-			scores.left++;
+
+			if (newx < bounds.left()) {
+				scores.left++;
+			} else {scores.right++}
 			reset();
 		}
 
@@ -173,7 +176,7 @@ function reset() {
 	updateScores();
 }
 
-// 
+//
 // Scoring System
 //
 
