@@ -46,13 +46,13 @@ var bounds = {
 		return 0
 	},
 	left: () => {
-		return 0 + left.getBoundingClientRect().width - 6;
+		return 0;
 	},
 	right: (div) => {
 		let rightcord = main.getBoundingClientRect().width;
 		rightcord -= div.getBoundingClientRect().width;
 		rightcord -= parseInt(getComputedStyle(main).getPropertyValue("--padding")) * 2;
-		return rightcord - 6;
+		return rightcord;
 	},
 	bottom: (div) => {
 		let bottom = main.getBoundingClientRect().height;
@@ -115,8 +115,8 @@ let velocity = {
 function moveBall() {
 	let newy = ballpos.y + velocity.y;
 	let newx = ballpos.x + velocity.x;
-	let increaseY = -0.1;
-	let increaseX = -0.1;
+	let increaseY = 0;
+	let increaseX = 0;
 
 	if (Math.sign(newy) == -1) {increaseY *= -1}
 	if (Math.sign(newx) == -1) {increaseX *= -1}
@@ -124,33 +124,24 @@ function moveBall() {
 	if (velocity.y >= 5 || velocity.y <= -5) {increaseY = 0}
 	if (velocity.x >= 5 || velocity.x <= -5) {increaseX = 0}
 
-	if (newy < bounds.top()) {
+	if (newy < bounds.top() || 
+		newy > bounds.bottom(ball)) {
+
 		velocity.y = (velocity.y * -0.8) + increaseY;
 		return;
 	}
 
-	if (newy > bounds.bottom(ball)) {
-		velocity.y = (velocity.y * -0.8) + increaseY;
-		return;
-	}
+	if (newx < bounds.left() ||
+		newx > bounds.right(ball)) {
 
-
-	if (newx < bounds.left()) {
 		let point = ball.getBoundingClientRect();
 		pointY = point.top - (point.height / 2);
-		if (! $.elementFromPoint(point.left, pointY).classList.contains("player")) {
-			scores.right++;
-			reset();
-		}
-
-		velocity.x = (velocity.x * -1) + increaseX;
-		return;
-	}
-
-	if (newx > bounds.right(ball)) {
-		let point = ball.getBoundingClientRect();
-		pointY = point.top - (point.height / 2);
-		if (! $.elementFromPoint(point.right, pointY).classList.contains("player")) {
+		let side = point.right;
+		if (newx < bounds.left()) {side = point.left}
+		if (
+			! $.elementFromPoint(side, pointY).classList.contains("player") ||
+			! $.elementFromPoint(side, point.top).classList.contains("player") ||
+			! $.elementFromPoint(side, point.bottom).classList.contains("player")) {
 			scores.left++;
 			reset();
 		}
